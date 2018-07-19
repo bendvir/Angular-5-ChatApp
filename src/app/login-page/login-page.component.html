@@ -1,0 +1,50 @@
+<!-- this is the HTML for Login page include validation -->
+<app-header></app-header>
+<div class="container">
+    <!-- general error message from TS on login button -->
+        <div class="alert alert-danger" *ngIf="errorMsg">
+            Please fill out all required fields
+       </div>
+    <div class="row col-6 col-xs-12">
+        <p>
+            Hello new user,
+        </p>
+        <p>
+           please choose nick name and color for continue
+        </p>
+        <!-- nick name -->
+        <div class="choosed-nick">
+            <h4>Nick Name:</h4>
+            <input             
+            required 
+            type="text" 
+            [(ngModel)]="nickName"
+            #nickNameValid ="ngModel"
+             minlength="3" 
+             maxlength="30"
+             pattern="(^[A-Za-z])|(\s)([A-Za-z])|[0-9]|(\s)"/>
+             <div class="alert alert-danger" *ngIf="nickNameValid.touched && !nickNameValid.valid">Please use correct english nick name
+                <div *ngIf="nickNameValid.errors.minlength">please type minimum {{nickNameValid.errors.minlength.requiredLength}} chars</div>                
+            </div>
+        </div> 
+             <!--color choose  -->
+        <div>
+            <h4>Text Color:</h4>
+            <input
+             required 
+             type="text" 
+             [(ngModel)]="color" 
+             #ColorValid ="ngModel"
+             minlength="7" 
+             maxlength="7"
+             pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" />
+             <input class="choosed-color" [(colorPicker)]="color" type="button" [style.background]="color" />
+            <div class="alert alert-danger" *ngIf="ColorValid.touched && !ColorValid.valid"> please use the hexadecimal format                    
+            </div>                    
+        </div>
+        <!-- btn for login -->
+        <div class="log-btn">
+            <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+        </div>
+    </div>
+</div>

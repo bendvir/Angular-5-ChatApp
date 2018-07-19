@@ -1,0 +1,15 @@
+.choosed-color{
+    background: rgb(89, 137, 42);
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    display: inline-block;
+    /* margin-top: 20px; */
+    box-shadow: 3px 3px rgba(0,0,0,0.5);
+}
+.choosed-nick{
+    margin-top: 20px;
+}
+.log-btn{
+    margin-top: 10px;
+}

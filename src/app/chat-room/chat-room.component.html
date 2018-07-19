@@ -1,0 +1,78 @@
+<!-- this is the HTML of Chat in main page include buttons+ chat nav  -->
+<div class="container">
+    <div class="row">
+        <!-- general error coming from TS -->
+        <div class="alert alert-danger" *ngIf="errorEmptyMsg">
+            You cant send empty message
+        </div>
+        <div class="alert alert-danger" *ngIf="errorCharMsg">
+            message should be in minimum 4 chars and max 255 chars
+        </div>
+        <!-- nav bar of chat  change active when you press on other tab -->
+        <div class="col-md-12 col-xs-12">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                        <li [ngClass]="{'active' : activeArray[0]}" (click)=activeRoom(0)>
+                            <a href="mainPage#tab1primary" data-toggle="tab">Room 1</a>
+                        </li>
+                        <li [ngClass]="{'active' : activeArray[1]}" (click)=activeRoom(1)>
+                            <a href="mainPage#tab2primary" data-toggle="tab">Room 2</a>
+                        </li>
+                        <li [ngClass]="{'active' : activeArray[2]}" (click)=activeRoom(2)>
+                            <a href="mainPage#tab3primary" data-toggle="tab">Room 3</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <!-- <app-chat-body></app-chat-body> -->
+                        <div [ngClass]="{'in active' : activeArray[0]}" class="tab-pane fade " id="tab1primary">
+                            <div *ngFor="let chatRow of chatRowsArr[0]" [style.color]="chatRow.color">
+                                <div [style.font-size.px]="fontSize" class="break-word">
+                                    {{chatRow.nick}} - {{chatRow.date | date: 'dd-MM-yyyy'}}: {{chatRow.message}}
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'in active' : activeArray[1]}" class="tab-pane fade" id="tab2primary">
+                            <div *ngFor="let chatRow of chatRowsArr[1]" [style.color]="chatRow.color">
+                                <div [style.font-size.px]="fontSize" class="break-word">
+                                    {{chatRow.nick}} - {{chatRow.date | date: 'dd-MM-yyyy'}}: {{chatRow.message}}
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'in active' : activeArray[2]}" class="tab-pane fade" id="tab3primary">
+                            <div *ngFor="let chatRow of chatRowsArr[2]" [style.color]="chatRow.color">
+                                <div [style.font-size.px]="fontSize" class="break-word">
+                                    {{chatRow.nick}} - {{chatRow.date | date: 'dd-MM-yyyy'}}: {{chatRow.message}}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- message text box  -->
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <span>Write a message:</span>
+            <input [(ngModel)]="message" type="text" minlength="4" maxlength="255" class="msg-class" />
+
+        </div>
+    </div>
+    <!-- send message and delete buttons -->
+    <div class="row btn-rows">
+        <div class="col-md-8 col-xs-8">
+                    <button type="button" class="col-md-3 btn btn-success msg-class" (click)="sendMessage(msgValid)">Send message</button>
+                    <button type="button" class="col-md-3 btn btn-danger msg-class" (click)="deleteMessage()">Clear message</button>
+        </div>
+    <!-- increase and decreasing the text size  -->
+        <div class="col-md-4 col-xs-4">
+            <button type="button" class="col-xs-6 plus-icon resize-icon" (click)="maxSize()"></button>
+            <button type="button" class="col-xs-6  minus-icon resize-icon" (click)="minSize()"></button>
+        </div>
+    </div>
+</div>
